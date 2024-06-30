@@ -32,9 +32,9 @@ def detect_date_type_and_convert_month(date_text):
         'September': 9, 'October': 10, 'November': 11, 'December': 12
     }
     islamic_months = {
-        'محرم': 1, 'صفر': 2, 'ربیع‌الاول': 3, 'ربیع‌الثانی': 4,
-        'جمادی‌الاول': 5, 'جمادی‌الثانی': 6, 'رجب': 7, 'شعبان': 8,
-        'رمضان': 9, 'شوال': 10, 'ذی‌القعده': 11, 'ذی‌الحجه': 12
+        'محرم': 1, 'صفر': 2, 'ربيع الاول': 3, 'ربيع الثاني': 4,
+        'جمادي الاولي': 5, 'جمادي الثانيه': 6, 'رجب': 7, 'شعبان': 8,
+        'رمضان': 9, 'شوال': 10, 'ذوالقعده': 11, 'ذوالحجه': 12
     }
     
     if any(month in date_text for month in jalali_months):
@@ -98,8 +98,9 @@ for month in range(1, 13):
         event_date_element = event.select_one('span[id^="ctl00_cphTop_Sampa_Web_View_EventUI_EventCalendarSimple"]')
         if (event_date_type_o != ''):
             date_not_shamsi = event_date_type_o.split(' ')
-            event_date = date_not_shamsi[2]
             day = int(convert_persian_to_english_number(date_not_shamsi[1]))
+            event_date = event_date_type_o.split(date_not_shamsi[1])[1].split(']')[0].strip()
+            
         else :
             date_shamsi =event_date_element.text.strip().split(' ')
             event_date = date_shamsi[1]
